@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+char mainstr[100],tempstr[100],repstr[100],patstr[100];
+void read_string()
+{
+    printf("Enter the mainstring\n");
+    gets(mainstr);
+    printf("Enter the pattern string\n");
+    gets(patstr);
+    printf("Enter the replacestring\n");
+    gets(repstr);
+}
+void display_string()
+{
+    printf("mainstring\n");
+    puts(mainstr);
+    printf("pattern string\n");
+    puts(patstr);
+    printf("replacestring\n");
+    puts(repstr);
+}
+void pattern_match()
+{
+    int mi=0,pi=0,ci=0,ti=0,ri=0,flag=0;
+    while(mainstr[mi]!='\0')
+    {
+        if(mainstr[ci]==patstr[pi])
+        {
+            ci++;
+            pi++;
+            if(patstr[pi]=='\0')
+            {
+                for(ri=0;repstr[ri]!='\0';ri++)
+                {
+                    tempstr[ti]=repstr[ri];
+                    ti++;
+                }
+                flag=1;
+                pi=0;
+                mi=ci;
+            }
+        }
+        else
+        {
+            tempstr[ti]=mainstr[mi];
+            ti++;
+            mi++;
+            ci=mi;
+        }
+    }
+    if(flag==1)
+    {
+        printf("pattern found\n");
+        tempstr[ti]='\0';
+        strcpy(mainstr,tempstr);
+        printf("string after repalcement\n");
+        puts(mainstr);
+    }
+    else
+    {
+        printf("pattern not found");
+    }
+}
+int main()
+{
+    read_string();
+    display_string();
+    pattern_match();
+    return 0;
+    
+}
